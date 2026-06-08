@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>EMI Calculator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #9face6);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 320px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #6c63ff;
+            box-shadow: 0 0 5px rgba(108, 99, 255, 0.5);
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 8px;
+            background: #6c63ff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #5548d9;
+            transform: scale(1.03);
+        }
+
+        #result {
+            margin-top: 15px;
+            color: #222;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>EMI Calculator</h1>
+
+        <p>Enter Product Price:</p>
+        <input type="number" id="price">
+
+        <p>Loan Years:</p>
+        <input type="number" id="years">
+
+        <p>Interest Rate (% per year):</p>
+        <input type="number" id="interest">
+
+        <button onclick="calculateEMI()">Calculate EMI</button>
+
+        <h2 id="result"></h2>
+
+    </div>
+
+    <script>
+        function calculateEMI() {
+            let P = Number(document.getElementById("price").value);
+            let years = Number(document.getElementById("years").value);
+            let annualRate = Number(document.getElementById("interest").value);
+
+            let n = years * 12;
+            let r = annualRate / 12 / 100;
+
+            let emi = (P * r * Math.pow(1 + r, n)) /
+                (Math.pow(1 + r, n) - 1);
+
+            document.getElementById("result").innerText =
+                "Monthly EMI: ₹ " + emi.toFixed(2);
+        }
+    </script>
+
+</body>
+
+</html>
