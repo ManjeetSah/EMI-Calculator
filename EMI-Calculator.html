@@ -3,53 +3,54 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EMI Calculator</title>
     <style>
-    body{
-    font-size:18px;
-    }
+        h1 {
+            color: purple;
+        }
+
+        button {
+            background-color: rgb(146, 196, 246);
+            font-size: 30px;
+        }
     </style>
-    
 </head>
 
 <body>
+    <h1>EMI Calculator</h1>
+    <p>Enter Product Price :</p>
+    <input type="number" placeholder="Enter price" id="price">
 
-    <div class="container">
+    <p>Enter Downpayment :</p>
+    <input type="number" placeholder="Enter Downpayment" id="downpayment">
 
-        <h1>EMI Calculator</h1>
+    <p>Enter Interest rate(%):</p>
+    <input type="number" placeholder="Enter Interest" id="interest">
 
-        <p>Enter Product Price:</p>
-        <input type="number" id="price">
+    <p>Enter no. of years:</p>
+    <input type="number" placeholder="for how many years" id="year">
 
-        <p>Loan Years:</p>
-        <input type="number" id="years">
-
-        <p>Interest Rate (% per year):</p>
-        <input type="number" id="interest">
-<br><br>
-        <button onclick="calculateEMI()">Calculate EMI</button>
-
-        <h2 id="result"></h2>
-
-    </div>
-
+    <br><br>
+    <button onclick="CalculateEMI()">Calculate</button>
+    <h2 id="result"></h2>
+    <br><br><br><br>
+    <footer>
+        <p>&copy;2026 Manjeet Sah.All Rights Reserved.</p>
+    </footer>
     <script>
-        function calculateEMI() {
-            let P = Number(document.getElementById("price").value);
-            let years = Number(document.getElementById("years").value);
-            let annualRate = Number(document.getElementById("interest").value);
-
-            let n = years * 12;
-            let r = annualRate / 12 / 100;
-
-            let emi = (P * r * Math.pow(1 + r, n)) /
-                (Math.pow(1 + r, n) - 1);
-
-            document.getElementById("result").innerText =
-                "Monthly EMI: ₹ " + emi.toFixed(2);
+        function CalculateEMI() {
+            let price = Number(document.getElementById("price").value);
+            let downpayment = Number(document.getElementById("downpayment").value);
+            let interest = Number(document.getElementById("interest").value);
+            let year = Number(document.getElementById("year").value);
+            let loan_amount = price - downpayment;
+            let months = 12 * year;
+            let rate = interest / (12 * 100);
+            let emi = (loan_amount * rate * (Math.pow(1 + rate, months))) / (Math.pow(1 + rate, months) - 1);
+            document.getElementById("result").innerHTML = "Estimated EMI:" + emi.toFixed(2);
         }
     </script>
-
 </body>
 
 </html>
